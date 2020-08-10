@@ -25,7 +25,7 @@ func CLI(args []string) int {
 }
 
 type appEnv struct {
-	hc         *http.Client
+	hc         http.Client
 	comicNo    int
 	saveImage  bool
 	outputJSON bool
@@ -33,7 +33,7 @@ type appEnv struct {
 
 func (app *appEnv) fromArgs(args []string) error {
 	// Shallow copy of default client
-	app.hc = &*http.DefaultClient
+	app.hc = *http.DefaultClient
 	fl := flag.NewFlagSet("xkcd-grab", flag.ContinueOnError)
 	fl.IntVar(
 		&app.comicNo, "n", LatestComic, "Comic number to fetch (default latest)",
